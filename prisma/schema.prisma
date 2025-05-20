@@ -1,0 +1,188 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modelo de usuário para autenticação
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  role          Role      @default(USER)
+  subscription  Subscription?
+  products      Product[]
+  clients       Client[]
+  sales         Sale[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// Modelo de planos e assinaturas
+model Plan {
+  id           String        @id @default(cuid())
+  name         String
+  description  String
+  price        Float
+  priceYearly  Float
+  productLimit Int           @default(100)
+  clientLimit  Int           @default(50)
+  features     String[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id             String       @id @default(cuid())
+  userId         String       @unique
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  planId         String
+  plan           Plan         @relation(fields: [planId], references: [id])
+  status         SubStatus    @default(ACTIVE)
+  startDate      DateTime     @default(now())
+  endDate        DateTime?
+  paymentMethod  String?
+  lastPayment    DateTime?
+  nextPayment    DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+enum SubStatus {
+  ACTIVE
+  CANCELED
+  TRIAL
+  EXPIRED
+}
+
+// Modelo de produtos
+model Product {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  price       Float
+  cost        Float?
+  categories  Category[]
+  sizes       Size[]
+  colors      Color[]
+  stock       Int       @default(0)
+  imageUrl    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  saleItems   SaleItem[]
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Size {
+  id        String    @id @default(cuid())
+  name      String
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Color {
+  id        String    @id @default(cuid())
+  name      String
+  hexCode   String?
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+// Modelo de clientes
+model Client {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  phone     String?
+  email     String?
+  city      String?
+  state     String?
+  type      ClientType @default(RETAIL)
+  notes     String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  sales     Sale[]
+}
+
+enum ClientType {
+  RETAIL
+  RESELLER
+  EXCURSION
+}
+
+// Modelo de vendas
+model Sale {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clientId      String?
+  client        Client?   @relation(fields: [clientId], references: [id])
+  total         Float
+  discount      Float     @default(0)
+  paymentMethod String?
+  status        SaleStatus @default(COMPLETED)
+  items         SaleItem[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model SaleItem {
+  id          String    @id @default(cuid())
+  saleId      String
+  sale        Sale      @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  productId   String
+  product     Product   @relation(fields: [productId], references: [id])
+  quantity    Int
+  price       Float
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+enum SaleStatus {
+  COMPLETED
+  PENDING
+  CANCELED
+}
+
+// Modelo para suporte
+model SupportTicket {
+  id          String           @id @default(cuid())
+  email       String
+  name        String
+  subject     String
+  message     String
+  status      SupportStatus    @default(OPEN)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+enum SupportStatus {
+  OPEN
+  IN_PROGRESS
+  CLOSED
+} 
