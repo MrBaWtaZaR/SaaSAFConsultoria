@@ -89,26 +89,26 @@ export default function NewProductPage() {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 dark:bg-gray-900">
       <div className="mb-6">
         <button 
           onClick={() => router.back()}
-          className="flex items-center text-sm text-gray-600 hover:text-gray-900"
+          className="flex items-center text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
         >
           <ArrowLeft size={16} className="mr-1" /> Voltar para produtos
         </button>
       </div>
       
-      <h1 className="text-2xl font-bold mb-6">Novo Produto</h1>
+      <h1 className="text-2xl font-bold mb-6 dark:text-white">Novo Produto</h1>
       
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Nome do produto */}
             <div>
               <label 
                 htmlFor="name" 
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 Nome do produto <span className="text-red-500">*</span>
               </label>
@@ -119,7 +119,7 @@ export default function NewProductPage() {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                 placeholder="Nome do produto"
               />
             </div>
@@ -128,13 +128,13 @@ export default function NewProductPage() {
             <div>
               <label 
                 htmlFor="price" 
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 Preço de venda <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span className="text-gray-500">R$</span>
+                  <span className="text-gray-500 dark:text-gray-400">R$</span>
                 </div>
                 <input
                   id="price"
@@ -145,7 +145,7 @@ export default function NewProductPage() {
                   required
                   value={formData.price}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   placeholder="0,00"
                 />
               </div>
@@ -155,13 +155,13 @@ export default function NewProductPage() {
             <div>
               <label 
                 htmlFor="cost" 
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 Custo
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span className="text-gray-500">R$</span>
+                  <span className="text-gray-500 dark:text-gray-400">R$</span>
                 </div>
                 <input
                   id="cost"
@@ -171,7 +171,7 @@ export default function NewProductPage() {
                   min="0"
                   value={formData.cost}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   placeholder="0,00"
                 />
               </div>
@@ -181,7 +181,7 @@ export default function NewProductPage() {
             <div>
               <label 
                 htmlFor="stock" 
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 Estoque inicial <span className="text-red-500">*</span>
               </label>
@@ -193,7 +193,7 @@ export default function NewProductPage() {
                 required
                 value={formData.stock}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                 placeholder="Quantidade"
               />
             </div>
@@ -203,7 +203,7 @@ export default function NewProductPage() {
           <div>
             <label 
               htmlFor="description" 
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               Descrição
             </label>
@@ -213,19 +213,19 @@ export default function NewProductPage() {
               rows={3}
               value={formData.description}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
               placeholder="Descrição do produto"
             />
           </div>
           
           {/* Categorias */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Categorias
             </label>
             <div className="flex flex-wrap gap-2 mb-2">
               {formData.categories.map((category) => (
-                <div key={category} className="flex items-center bg-primary/10 text-primary px-3 py-1 rounded-full">
+                <div key={category} className="flex items-center bg-primary/10 dark:bg-primary/20 text-primary px-3 py-1 rounded-full">
                   <span>{category}</span>
                   <button 
                     type="button"
@@ -241,7 +241,7 @@ export default function NewProductPage() {
               <input
                 type="text"
                 placeholder="Adicionar categoria"
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-primary focus:border-primary"
+                className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-l-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                 value={newCategory}
                 onChange={(e) => setNewCategory(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddCategory())}
@@ -258,12 +258,12 @@ export default function NewProductPage() {
           
           {/* Tamanhos */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Tamanhos
             </label>
             <div className="flex flex-wrap gap-2 mb-2">
               {formData.sizes.map((size) => (
-                <div key={size} className="flex items-center bg-primary/10 text-primary px-3 py-1 rounded-full">
+                <div key={size} className="flex items-center bg-primary/10 dark:bg-primary/20 text-primary px-3 py-1 rounded-full">
                   <span>{size}</span>
                   <button 
                     type="button"
@@ -279,7 +279,7 @@ export default function NewProductPage() {
               <input
                 type="text"
                 placeholder="Adicionar tamanho"
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-primary focus:border-primary"
+                className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-l-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                 value={newSize}
                 onChange={(e) => setNewSize(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddSize())}
@@ -296,12 +296,12 @@ export default function NewProductPage() {
           
           {/* Cores */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Cores
             </label>
             <div className="flex flex-wrap gap-2 mb-2">
               {formData.colors.map((color) => (
-                <div key={color} className="flex items-center bg-primary/10 text-primary px-3 py-1 rounded-full">
+                <div key={color} className="flex items-center bg-primary/10 dark:bg-primary/20 text-primary px-3 py-1 rounded-full">
                   <span>{color}</span>
                   <button 
                     type="button"
@@ -317,7 +317,7 @@ export default function NewProductPage() {
               <input
                 type="text"
                 placeholder="Adicionar cor"
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-primary focus:border-primary"
+                className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-l-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                 value={newColor}
                 onChange={(e) => setNewColor(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddColor())}
@@ -334,13 +334,13 @@ export default function NewProductPage() {
           
           {/* Imagem (simplificado) */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Imagem do produto
             </label>
-            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-md dark:bg-gray-700">
               <div className="space-y-1 text-center">
                 <svg
-                  className="mx-auto h-12 w-12 text-gray-400"
+                  className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500"
                   stroke="currentColor"
                   fill="none"
                   viewBox="0 0 48 48"
@@ -353,17 +353,17 @@ export default function NewProductPage() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <div className="flex text-sm text-gray-600">
+                <div className="flex text-sm text-gray-600 dark:text-gray-400">
                   <label
                     htmlFor="file-upload"
-                    className="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary-dark focus-within:outline-none"
+                    className="relative cursor-pointer bg-white dark:bg-gray-700 rounded-md font-medium text-primary hover:text-primary-dark focus-within:outline-none"
                   >
                     <span>Fazer upload de uma imagem</span>
                     <input id="file-upload" name="file-upload" type="file" className="sr-only" />
                   </label>
                   <p className="pl-1">ou arraste e solte</p>
                 </div>
-                <p className="text-xs text-gray-500">PNG, JPG, GIF até 2MB</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, GIF até 2MB</p>
               </div>
             </div>
           </div>
@@ -371,7 +371,7 @@ export default function NewProductPage() {
           <div className="flex justify-end space-x-3">
             <Link 
               href="/dashboard/produtos" 
-              className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
             >
               Cancelar
             </Link>

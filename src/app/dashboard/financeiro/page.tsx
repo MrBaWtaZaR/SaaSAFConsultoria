@@ -182,9 +182,9 @@ export default function FinancePage() {
   })
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 dark:bg-gray-900">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Financeiro</h1>
+        <h1 className="text-2xl font-bold dark:text-white">Financeiro</h1>
         <div className="flex space-x-2">
           <Link 
             href="/dashboard/financeiro/contas"
@@ -200,7 +200,7 @@ export default function FinancePage() {
             <ListFilter size={16} />
             <span>Fluxo de Caixa</span>
           </Link>
-          <button className="flex items-center gap-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-md">
+          <button className="flex items-center gap-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-md dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
             <Download size={16} />
             <span>Exportar Relatório</span>
           </button>
@@ -210,248 +210,189 @@ export default function FinancePage() {
       {/* Resumo Financeiro Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Receita */}
-        <div className="bg-white rounded-lg shadow p-6 flex flex-col">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col">
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="text-sm font-medium text-gray-500">Receita (Mês Atual)</h2>
-              <p className="text-2xl font-bold mt-1 text-green-600">{formatCurrency(financialSummary.currentMonth.revenue)}</p>
+              <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Receita (Mês Atual)</h2>
+              <p className="text-2xl font-bold mt-1 text-green-600 dark:text-green-500">{formatCurrency(financialSummary.currentMonth.revenue)}</p>
             </div>
-            <div className="p-2 rounded-full bg-green-100">
-              <DollarSign size={20} className="text-green-600" />
+            <div className="p-2 rounded-full bg-green-100 dark:bg-green-900/30">
+              <DollarSign size={20} className="text-green-600 dark:text-green-500" />
             </div>
           </div>
-          <div className={`mt-4 text-sm ${revenueChange >= 0 ? 'text-green-600' : 'text-red-600'} flex items-center`}>
+          <div className={`mt-4 text-sm ${revenueChange >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'} flex items-center`}>
             {revenueChange >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
             <span className="ml-1">{Math.abs(revenueChange).toFixed(1)}% desde o mês anterior</span>
           </div>
         </div>
 
         {/* Despesas */}
-        <div className="bg-white rounded-lg shadow p-6 flex flex-col">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col">
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="text-sm font-medium text-gray-500">Despesas (Mês Atual)</h2>
-              <p className="text-2xl font-bold mt-1 text-red-600">{formatCurrency(financialSummary.currentMonth.expenses)}</p>
+              <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Despesas (Mês Atual)</h2>
+              <p className="text-2xl font-bold mt-1 text-red-600 dark:text-red-500">{formatCurrency(financialSummary.currentMonth.expenses)}</p>
             </div>
-            <div className="p-2 rounded-full bg-red-100">
-              <ArrowDownCircle size={20} className="text-red-600" />
+            <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30">
+              <ArrowDownCircle size={20} className="text-red-600 dark:text-red-500" />
             </div>
           </div>
-          <div className={`mt-4 text-sm ${expensesChange <= 0 ? 'text-green-600' : 'text-red-600'} flex items-center`}>
+          <div className={`mt-4 text-sm ${expensesChange <= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'} flex items-center`}>
             {expensesChange <= 0 ? <ArrowDown size={16} /> : <ArrowUp size={16} />}
             <span className="ml-1">{Math.abs(expensesChange).toFixed(1)}% desde o mês anterior</span>
           </div>
         </div>
 
         {/* Lucro */}
-        <div className="bg-white rounded-lg shadow p-6 flex flex-col">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col">
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="text-sm font-medium text-gray-500">Lucro (Mês Atual)</h2>
+              <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Lucro (Mês Atual)</h2>
               <p className="text-2xl font-bold mt-1 text-primary">{formatCurrency(financialSummary.currentMonth.profit)}</p>
             </div>
             <div className="p-2 rounded-full bg-primary/10">
               <TrendingUp size={20} className="text-primary" />
             </div>
           </div>
-          <div className={`mt-4 text-sm ${profitChange >= 0 ? 'text-green-600' : 'text-red-600'} flex items-center`}>
+          <div className={`mt-4 text-sm ${profitChange >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'} flex items-center`}>
             {profitChange >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
             <span className="ml-1">{Math.abs(profitChange).toFixed(1)}% desde o mês anterior</span>
           </div>
         </div>
 
-        {/* Margem de Lucro */}
-        <div className="bg-white rounded-lg shadow p-6 flex flex-col">
+        {/* Margem */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col">
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="text-sm font-medium text-gray-500">Margem de Lucro</h2>
-              <p className="text-2xl font-bold mt-1 text-blue-600">{financialSummary.currentMonth.profitMargin.toFixed(1)}%</p>
+              <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Margem de Lucro</h2>
+              <p className="text-2xl font-bold mt-1 text-primary">{financialSummary.currentMonth.profitMargin.toFixed(1)}%</p>
             </div>
-            <div className="p-2 rounded-full bg-blue-100">
-              <Percent size={20} className="text-blue-600" />
+            <div className="p-2 rounded-full bg-primary/10">
+              <Percent size={20} className="text-primary" />
             </div>
           </div>
-          <div className={`mt-4 text-sm ${marginChange >= 0 ? 'text-green-600' : 'text-red-600'} flex items-center`}>
+          <div className={`mt-4 text-sm ${marginChange >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'} flex items-center`}>
             {marginChange >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
-            <span className="ml-1">{Math.abs(marginChange).toFixed(1)} pontos percentuais</span>
+            <span className="ml-1">{Math.abs(marginChange).toFixed(1)}% desde o mês anterior</span>
           </div>
         </div>
       </div>
 
-      {/* Gráficos */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Receitas e Despesas Mensais */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-medium">Receitas e Despesas Mensais</h2>
-            <div className="flex space-x-2">
-              <button 
-                className={`text-xs px-3 py-1 rounded-md ${currentPeriod === 'month' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700'}`}
-                onClick={() => setCurrentPeriod('month')}
-              >
-                Mensal
-              </button>
-              <button 
-                className={`text-xs px-3 py-1 rounded-md ${currentPeriod === 'quarter' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700'}`}
-                onClick={() => setCurrentPeriod('quarter')}
-              >
-                Trimestral
-              </button>
-              <button 
-                className={`text-xs px-3 py-1 rounded-md ${currentPeriod === 'year' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700'}`}
-                onClick={() => setCurrentPeriod('year')}
-              >
-                Anual
-              </button>
-            </div>
+      {/* Filtros e busca */}
+      <div className="flex flex-col md:flex-row md:items-center gap-4">
+        <div className="relative flex-1">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Search size={18} className="text-gray-400" />
           </div>
-          <div className="h-64 bg-gray-100 flex items-center justify-center rounded-md">
-            <div className="flex flex-col items-center">
-              <BarChart2 size={40} className="text-gray-400 mb-2" />
-              <p className="text-gray-500">Gráfico de Receitas e Despesas (simulado)</p>
-              <div className="flex mt-4 space-x-4">
-                {monthlyData.map((month) => (
-                  <div key={month.month} className="flex flex-col items-center">
-                    <div className="flex flex-col h-40 space-y-1 items-center justify-end">
-                      <div className="w-6 bg-green-500" style={{ height: `${month.revenue / 100}px` }}></div>
-                      <div className="w-6 bg-red-500" style={{ height: `${month.expenses / 100}px` }}></div>
-                    </div>
-                    <span className="text-xs mt-1">{month.month}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <input
+            type="text"
+            placeholder="Buscar transação..."
+            className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
-
-        {/* Formas de Pagamento */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-medium mb-4">Formas de Pagamento Recebidas</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="h-48 bg-gray-100 flex items-center justify-center rounded-md">
-              <div className="flex flex-col items-center">
-                <PieChart size={40} className="text-gray-400 mb-2" />
-                <p className="text-gray-500">Gráfico de Métodos (simulado)</p>
-              </div>
-            </div>
-            <div className="space-y-3">
-              {paymentMethodsData.map((item) => (
-                <div key={item.method} className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">{item.method}</span>
-                    <span className="text-sm text-gray-500">{item.percentage}%</span>
-                  </div>
-                  <div className="w-full h-2 bg-gray-200 rounded-full mt-1">
-                    <div
-                      className="h-2 bg-primary rounded-full"
-                      style={{ width: `${item.percentage}%` }}
-                    ></div>
-                  </div>
-                  <span className="text-xs text-gray-500 mt-1">
-                    {formatCurrency(item.amount)}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+        
+        <div className="flex items-center gap-2">
+          <Filter size={18} className="text-gray-400" />
+          <select
+            className="block w-full py-2 pl-3 pr-10 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+          >
+            {transactionTypes.map(type => (
+              <option key={type.id} value={type.id}>{type.name}</option>
+            ))}
+          </select>
+        </div>
+        
+        <div className="flex items-center gap-2">
+          <Calendar size={18} className="text-gray-400" />
+          <select
+            className="block w-full py-2 pl-3 pr-10 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+            value={currentPeriod}
+            onChange={(e) => setCurrentPeriod(e.target.value)}
+          >
+            <option value="week">Esta Semana</option>
+            <option value="month">Este Mês</option>
+            <option value="quarter">Este Trimestre</option>
+            <option value="year">Este Ano</option>
+          </select>
         </div>
       </div>
 
-      {/* Transações Financeiras */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <div className="p-6 border-b">
-          <h2 className="text-lg font-medium">Transações Financeiras</h2>
-        </div>
-
-        {/* Filtros e busca */}
-        <div className="p-4 bg-gray-50 border-b flex flex-col md:flex-row md:items-center gap-4">
-          <div className="relative flex-1">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search size={18} className="text-gray-400" />
-            </div>
-            <input
-              type="text"
-              placeholder="Buscar transações..."
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          <div className="flex items-center space-x-2">
-            <Filter size={18} className="text-gray-400" />
-            <select
-              className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-            >
-              {transactionTypes.map((type) => (
-                <option key={type.id} value={type.id}>{type.name}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        {/* Lista de transações */}
+      {/* Lista de transações */}
+      <div className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Descrição
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Data
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Valor
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  Tipo
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Método
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Status
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
               {filteredTransactions.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
+                  <td colSpan={6} className="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
                     Nenhuma transação encontrada
                   </td>
                 </tr>
               ) : (
                 filteredTransactions.map((transaction) => (
                   <tr key={transaction.id}>
-                    <td className="px-6 py-4">
-                      <div className="text-sm font-medium text-gray-900">{transaction.description}</div>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm font-medium text-gray-900 dark:text-white">{transaction.description}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Calendar size={14} className="mr-1" />
-                        {formatDate(transaction.date)}
+                      <div className="text-sm text-gray-500 dark:text-gray-400">{formatDate(transaction.date)}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className={`text-sm font-medium ${transaction.type === 'INCOME' ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
+                        {transaction.type === 'INCOME' ? '+' : '-'}{formatCurrency(transaction.amount)}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className={`text-sm font-medium ${
-                        transaction.type === 'INCOME' ? 'text-green-600' : 'text-red-600'
+                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                        transaction.type === 'INCOME' 
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
                       }`}>
-                        {transaction.type === 'INCOME' ? '+' : '-'} {formatCurrency(transaction.amount)}
-                      </div>
+                        {transaction.type === 'INCOME' ? 'Receita' : 'Despesa'}
+                      </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
-                        {transaction.method}
-                        {transaction.installments > 1 && ` (${transaction.installments}x)`}
-                      </div>
+                      <div className="text-sm text-gray-900 dark:text-gray-200">{transaction.method}</div>
+                      {transaction.installments > 1 && (
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          Em {transaction.installments}x
+                        </div>
+                      )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span 
-                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                        ${transaction.status === 'COMPLETED' ? 'bg-green-100 text-green-800' : 
-                          transaction.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' : 
-                          'bg-red-100 text-red-800'}`}
-                      >
+                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                        transaction.status === 'COMPLETED' 
+                          ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
+                          : transaction.status === 'PENDING'
+                            ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
+                            : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400'
+                      }`}>
                         {transactionStatusLabels[transaction.status]}
                       </span>
                     </td>
@@ -460,13 +401,6 @@ export default function FinancePage() {
               )}
             </tbody>
           </table>
-        </div>
-
-        {/* Opção para ver mais */}
-        <div className="px-6 py-4 border-t">
-          <button className="text-primary text-sm font-medium hover:underline">
-            Ver mais transações
-          </button>
         </div>
       </div>
     </div>

@@ -93,13 +93,13 @@ export default function ReportsPage() {
   const [period, setPeriod] = useState('7dias')
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 dark:bg-gray-900">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Relatórios</h1>
+        <h1 className="text-2xl font-bold dark:text-white">Relatórios</h1>
         <div className="flex items-center space-x-2">
           <Calendar size={18} className="text-gray-400" />
           <select
-            className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+            className="block w-full py-2 pl-3 pr-10 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
             value={period}
             onChange={(e) => setPeriod(e.target.value)}
           >
@@ -114,22 +114,22 @@ export default function ReportsPage() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {statsData.map((stat) => (
-          <div key={stat.id} className="bg-white rounded-lg shadow p-6 flex flex-col">
+          <div key={stat.id} className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col">
             <div className="flex justify-between items-start">
               <div>
-                <h2 className="text-sm font-medium text-gray-500">{stat.title}</h2>
-                <p className="text-2xl font-bold mt-1">{stat.value}</p>
+                <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">{stat.title}</h2>
+                <p className="text-2xl font-bold mt-1 dark:text-white">{stat.value}</p>
               </div>
-              <div className={`p-2 rounded-full bg-${stat.color}-100`}>
+              <div className={`p-2 rounded-full bg-${stat.color}-100 dark:bg-${stat.color}-900`}>
                 <stat.icon 
                   size={20} 
-                  className={`text-${stat.color}-600`} 
+                  className={`text-${stat.color}-600 dark:text-${stat.color}-400`} 
                 />
               </div>
             </div>
             <div className={`mt-4 text-sm ${
-              stat.status === 'up' ? 'text-green-600' : 
-              stat.status === 'down' ? 'text-red-600' : 'text-gray-600'
+              stat.status === 'up' ? 'text-green-600 dark:text-green-400' : 
+              stat.status === 'down' ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'
             }`}>
               {stat.change} {stat.status === 'up' && 'desde o período anterior'}
             </div>
@@ -140,19 +140,21 @@ export default function ReportsPage() {
       {/* Gráficos */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Gráfico de vendas */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-medium mb-4">Vendas do Período</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h2 className="text-lg font-medium mb-4 dark:text-white">Vendas do Período</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={salesData}
                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
               >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis dataKey="name" stroke="#9CA3AF" />
+                <YAxis stroke="#9CA3AF" />
                 <Tooltip
-                  formatter={(value) => [`R$ ${value.toFixed(2)}`, 'Vendas']}
+                  formatter={(value) => [`R$ ${typeof value === 'number' ? value.toFixed(2) : value}`, 'Vendas']}
+                  contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', color: '#F9FAFB' }}
+                  labelStyle={{ color: '#F9FAFB' }}
                 />
                 <Legend />
                 <Line
@@ -168,8 +170,8 @@ export default function ReportsPage() {
         </div>
         
         {/* Gráfico de formas de pagamento */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-medium mb-4">Formas de Pagamento</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h2 className="text-lg font-medium mb-4 dark:text-white">Formas de Pagamento</h2>
           <div className="h-64 flex justify-center">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -187,7 +189,11 @@ export default function ReportsPage() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value) => [`${value}%`, 'Percentual']} />
+                <Tooltip 
+                  formatter={(value) => [`${typeof value === 'number' ? value.toFixed(0) : value}%`, 'Percentual']}
+                  contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', color: '#F9FAFB' }}
+                  labelStyle={{ color: '#F9FAFB' }}
+                />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
@@ -195,8 +201,8 @@ export default function ReportsPage() {
         </div>
         
         {/* Top Produtos */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-medium mb-4">Produtos Mais Vendidos</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h2 className="text-lg font-medium mb-4 dark:text-white">Produtos Mais Vendidos</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
@@ -204,10 +210,13 @@ export default function ReportsPage() {
                 layout="vertical"
                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
               >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" />
-                <YAxis dataKey="name" type="category" width={100} />
-                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis type="number" stroke="#9CA3AF" />
+                <YAxis dataKey="name" type="category" width={100} stroke="#9CA3AF" />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', color: '#F9FAFB' }}
+                  labelStyle={{ color: '#F9FAFB' }}
+                />
                 <Legend />
                 <Bar dataKey="vendas" fill="#10b981" name="Unidades Vendidas" />
               </BarChart>
@@ -216,18 +225,18 @@ export default function ReportsPage() {
         </div>
         
         {/* Outros gráficos e análises podem ser adicionados aqui */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-medium mb-4">Categorias de Produtos</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h2 className="text-lg font-medium mb-4 dark:text-white">Categorias de Produtos</h2>
           <div className="h-64 flex items-center justify-center">
-            <p className="text-gray-500">Gráfico de categorias (em desenvolvimento)</p>
+            <p className="text-gray-500 dark:text-gray-400">Gráfico de categorias (em desenvolvimento)</p>
           </div>
         </div>
       </div>
 
       {/* Seção para período mais longo */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <div className="p-6 border-b">
-          <h2 className="text-lg font-medium">Análise Mensal (2023)</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+        <div className="p-6 border-b dark:border-gray-700">
+          <h2 className="text-lg font-medium dark:text-white">Análise Mensal (2023)</h2>
         </div>
         <div className="p-6">
           <div className="h-80">
@@ -242,10 +251,14 @@ export default function ReportsPage() {
                 ]}
                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
               >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip formatter={(value) => [`R$ ${value.toFixed(2)}`, 'Vendas']} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis dataKey="name" stroke="#9CA3AF" />
+                <YAxis stroke="#9CA3AF" />
+                <Tooltip 
+                  formatter={(value) => [`R$ ${typeof value === 'number' ? value.toFixed(2) : value}`, 'Vendas']}
+                  contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', color: '#F9FAFB' }}
+                  labelStyle={{ color: '#F9FAFB' }}
+                />
                 <Legend />
                 <Bar dataKey="vendas" fill="#4f46e5" name="Vendas (R$)" />
               </BarChart>

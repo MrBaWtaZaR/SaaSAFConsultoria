@@ -19,9 +19,9 @@ export default function DashboardPage() {
   ]
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 dark:bg-gray-900">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
+        <h1 className="text-title">Dashboard</h1>
         <div className="flex space-x-2">
           <Link 
             href="/dashboard/produtos/novo" 
@@ -43,20 +43,20 @@ export default function DashboardPage() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {statsData.map((stat) => (
-          <div key={stat.id} className="bg-white rounded-lg shadow p-6 flex flex-col">
+          <div key={stat.id} className="card">
             <div className="flex justify-between items-start">
               <div>
-                <h2 className="text-sm font-medium text-gray-500">{stat.title}</h2>
-                <p className="text-2xl font-bold mt-1">{stat.value}</p>
+                <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">{stat.title}</h2>
+                <p className="text-2xl font-bold mt-1 dark:text-white">{stat.value}</p>
               </div>
-              <div className={`p-2 rounded-full ${stat.status === 'up' ? 'bg-green-100' : 'bg-red-100'}`}>
+              <div className={`p-2 rounded-full ${stat.status === 'up' ? 'bg-green-100 dark:bg-green-900' : 'bg-red-100 dark:bg-red-900'}`}>
                 <stat.icon 
                   size={20} 
-                  className={stat.status === 'up' ? 'text-green-600' : 'text-red-600'} 
+                  className={stat.status === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'} 
                 />
               </div>
             </div>
-            <div className={`mt-4 text-sm ${stat.status === 'up' ? 'text-green-600' : 'text-red-600'}`}>
+            <div className={`mt-4 text-sm ${stat.status === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
               {stat.change} {stat.status === 'up' ? 'desde o último mês' : 'produtos'}
             </div>
           </div>
@@ -65,73 +65,73 @@ export default function DashboardPage() {
 
       {/* Charts (mock) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-medium mb-4">Vendas dos Últimos 7 Dias</h2>
-          <div className="bg-gray-100 h-64 rounded flex items-center justify-center">
-            <p className="text-gray-500">Gráfico de vendas (simulado)</p>
+        <div className="card">
+          <h2 className="card-header">Vendas dos Últimos 7 Dias</h2>
+          <div className="bg-gray-100 dark:bg-gray-700 h-64 rounded flex items-center justify-center">
+            <p className="text-gray-500 dark:text-gray-400">Gráfico de vendas (simulado)</p>
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-medium mb-4">Produtos Mais Vendidos</h2>
-          <div className="bg-gray-100 h-64 rounded flex items-center justify-center">
-            <p className="text-gray-500">Gráfico de produtos (simulado)</p>
+        <div className="card">
+          <h2 className="card-header">Produtos Mais Vendidos</h2>
+          <div className="bg-gray-100 dark:bg-gray-700 h-64 rounded flex items-center justify-center">
+            <p className="text-gray-500 dark:text-gray-400">Gráfico de produtos (simulado)</p>
           </div>
         </div>
       </div>
 
       {/* Recent Sales */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <div className="p-6 border-b">
-          <h2 className="text-lg font-medium">Vendas Recentes</h2>
+      <div className="table-container">
+        <div className="p-6 border-b dark:border-gray-700">
+          <h2 className="card-header">Vendas Recentes</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="table-header">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Cliente
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Data
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Valor
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Ações
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="table-body">
               {recentSales.map((sale) => (
-                <tr key={sale.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">{sale.client}</div>
+                <tr key={sale.id} className="table-row">
+                  <td className="table-cell">
+                    {sale.client}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">{sale.date}</div>
+                  <td className="table-cell-light">
+                    {sale.date}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <td className="table-cell font-medium">
                     {sale.total}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
                       {sale.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <a href="#" className="text-primary hover:text-indigo-900">Detalhes</a>
+                    <a href="#" className="text-primary hover:text-indigo-900 dark:hover:text-indigo-300">Detalhes</a>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <div className="px-6 py-4 border-t">
-          <Link href="/dashboard/vendas" className="text-primary text-sm font-medium hover:underline">
+        <div className="px-6 py-4 border-t dark:border-gray-700">
+          <Link href="/dashboard/vendas" className="text-primary dark:text-primary text-sm font-medium hover:underline">
             Ver todas as vendas
           </Link>
         </div>

@@ -163,20 +163,20 @@ export default function CashFlowPage() {
   })
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 dark:bg-gray-900">
       <div className="flex items-center mb-6">
         <Link 
           href="/dashboard/financeiro" 
-          className="flex items-center text-sm text-gray-600 hover:text-gray-900"
+          className="flex items-center text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
         >
           <ArrowLeft size={16} className="mr-1" /> Voltar para Financeiro
         </Link>
       </div>
       
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Fluxo de Caixa Diário</h1>
+        <h1 className="text-2xl font-bold dark:text-white">Fluxo de Caixa Diário</h1>
         <div className="flex space-x-2">
-          <button className="flex items-center gap-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-md">
+          <button className="flex items-center gap-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-md dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-300">
             <Download size={16} />
             <span>Exportar</span>
           </button>
@@ -184,7 +184,7 @@ export default function CashFlowPage() {
       </div>
 
       {/* Filtros e busca */}
-      <div className="flex flex-col md:flex-row md:items-center gap-4 bg-white p-4 rounded-lg shadow">
+      <div className="flex flex-col md:flex-row md:items-center gap-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <Search size={18} className="text-gray-400" />
@@ -192,7 +192,7 @@ export default function CashFlowPage() {
           <input
             type="text"
             placeholder="Buscar transações..."
-            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+            className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -201,7 +201,7 @@ export default function CashFlowPage() {
           <Calendar size={18} className="text-gray-400" />
           <input
             type="date"
-            className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+            className="block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
           />
@@ -209,7 +209,7 @@ export default function CashFlowPage() {
         {selectedDate && (
           <button 
             onClick={() => setSelectedDate('')}
-            className="py-2 px-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md"
+            className="py-2 px-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-300"
           >
             Limpar Filtro
           </button>
@@ -219,33 +219,33 @@ export default function CashFlowPage() {
       {/* Lista de dias com fluxo de caixa */}
       <div className="space-y-4">
         {filteredCashFlow.length === 0 ? (
-          <div className="bg-white p-6 rounded-lg shadow text-center text-gray-500">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow text-center text-gray-500 dark:text-gray-400">
             Nenhum registro de fluxo de caixa encontrado para o período selecionado.
           </div>
         ) : (
           filteredCashFlow.map((day) => (
-            <div key={day.date} className="bg-white rounded-lg shadow overflow-hidden">
+            <div key={day.date} className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
               {/* Cabeçalho do dia */}
               <div 
-                className="p-4 border-b flex justify-between items-center cursor-pointer hover:bg-gray-50"
+                className="p-4 border-b dark:border-gray-700 flex justify-between items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
                 onClick={() => toggleDayExpand(day.date)}
               >
                 <div className="flex items-center">
                   {expandedDays[day.date] ? (
-                    <ChevronDown size={20} className="text-gray-500 mr-2" />
+                    <ChevronDown size={20} className="text-gray-500 dark:text-gray-400 mr-2" />
                   ) : (
-                    <ChevronRight size={20} className="text-gray-500 mr-2" />
+                    <ChevronRight size={20} className="text-gray-500 dark:text-gray-400 mr-2" />
                   )}
                   <div>
-                    <h2 className="text-lg font-medium">{formatDate(day.date)}</h2>
-                    <p className="text-sm text-gray-500">
+                    <h2 className="text-lg font-medium dark:text-white">{formatDate(day.date)}</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
                       {day.transactions.length} transações
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-sm text-gray-500">Movimento do dia:</div>
-                  <div className={`font-medium ${getDayTotal(day.transactions) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">Movimento do dia:</div>
+                  <div className={`font-medium ${getDayTotal(day.transactions) >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                     {getDayTotal(day.transactions) >= 0 ? '+' : ''}{formatCurrency(getDayTotal(day.transactions))}
                   </div>
                 </div>
@@ -255,51 +255,51 @@ export default function CashFlowPage() {
               {expandedDays[day.date] && (
                 <div>
                   {/* Saldos */}
-                  <div className="grid grid-cols-2 gap-4 p-4 bg-gray-50">
+                  <div className="grid grid-cols-2 gap-4 p-4 bg-gray-50 dark:bg-gray-700">
                     <div>
-                      <span className="text-sm text-gray-500">Saldo Inicial:</span>
-                      <div className="font-medium">{formatCurrency(day.openingBalance)}</div>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Saldo Inicial:</span>
+                      <div className="font-medium dark:text-white">{formatCurrency(day.openingBalance)}</div>
                     </div>
                     <div className="text-right">
-                      <span className="text-sm text-gray-500">Saldo Final:</span>
-                      <div className="font-medium">{formatCurrency(day.closingBalance)}</div>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Saldo Final:</span>
+                      <div className="font-medium dark:text-white">{formatCurrency(day.closingBalance)}</div>
                     </div>
                   </div>
 
                   {/* Lista de transações */}
                   <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-50">
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                      <thead className="bg-gray-50 dark:bg-gray-700">
                         <tr>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                             Hora
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                             Descrição
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                             Método
                           </th>
-                          <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                             Valor
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
+                      <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                         {day.transactions.map((transaction) => (
                           <tr key={transaction.id}>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-900">{transaction.time}</div>
+                              <div className="text-sm text-gray-900 dark:text-white">{transaction.time}</div>
                             </td>
                             <td className="px-6 py-4">
-                              <div className="text-sm font-medium text-gray-900">{transaction.description}</div>
+                              <div className="text-sm font-medium text-gray-900 dark:text-white">{transaction.description}</div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-500">{transaction.method}</div>
+                              <div className="text-sm text-gray-500 dark:text-gray-400">{transaction.method}</div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-right">
                               <div className={`text-sm font-medium ${
-                                transaction.type === 'INCOME' ? 'text-green-600' : 'text-red-600'
+                                transaction.type === 'INCOME' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                               }`}>
                                 {transaction.type === 'INCOME' ? '+' : '-'} {formatCurrency(transaction.amount)}
                               </div>

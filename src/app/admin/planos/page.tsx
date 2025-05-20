@@ -159,18 +159,18 @@ export default function PlansPage() {
   };
   
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 dark:bg-gray-900">
       <div className="flex items-center mb-6">
         <Link 
           href="/admin" 
-          className="flex items-center text-sm text-gray-600 hover:text-gray-900"
+          className="flex items-center text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
         >
           <ArrowLeft size={16} className="mr-1" /> Voltar para Dashboard
         </Link>
       </div>
       
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Gerenciamento de Planos</h1>
+        <h1 className="text-2xl font-bold dark:text-white">Gerenciamento de Planos</h1>
         <button 
           onClick={handleCreatePlan}
           className="flex items-center gap-1 bg-primary hover:bg-primary/90 text-white py-2 px-4 rounded-md"
@@ -181,12 +181,12 @@ export default function PlansPage() {
       </div>
       
       {/* Tabs de navegação */}
-      <div className="flex border-b border-gray-200">
+      <div className="flex border-b border-gray-200 dark:border-gray-700">
         <button
           className={`py-2 px-4 font-medium text-sm ${
             activeTab === 'list'
               ? 'text-primary border-b-2 border-primary'
-              : 'text-gray-500 hover:text-gray-700'
+              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
           }`}
           onClick={() => setActiveTab('list')}
         >
@@ -196,7 +196,7 @@ export default function PlansPage() {
           className={`py-2 px-4 font-medium text-sm ${
             activeTab === 'comparison'
               ? 'text-primary border-b-2 border-primary'
-              : 'text-gray-500 hover:text-gray-700'
+              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
           }`}
           onClick={() => setActiveTab('comparison')}
         >
@@ -205,40 +205,40 @@ export default function PlansPage() {
       </div>
       
       {activeTab === 'list' && (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="p-6 border-b">
-            <h2 className="text-lg font-medium">Planos Disponíveis</h2>
-            <p className="text-sm text-gray-500 mt-1">Configure os planos, preços e funcionalidades oferecidas aos clientes</p>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+          <div className="p-6 border-b dark:border-gray-700">
+            <h2 className="text-lg font-medium dark:text-white">Planos Disponíveis</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Configure os planos, preços e funcionalidades oferecidas aos clientes</p>
           </div>
           
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-gray-200 dark:divide-gray-700">
             {plans.map(plan => (
               <div key={plan.id} className="p-6">
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
                     <div className="flex items-center mb-2">
-                      <h3 className="text-lg font-medium text-gray-900">{plan.name}</h3>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">{plan.name}</h3>
                       {plan.isActive ? (
-                        <span className="ml-2 px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                        <span className="ml-2 px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
                           Ativo
                         </span>
                       ) : (
-                        <span className="ml-2 px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800">
+                        <span className="ml-2 px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
                           Inativo
                         </span>
                       )}
                       {!plan.isPublic && (
-                        <span className="ml-2 px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
+                        <span className="ml-2 px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
                           Privado
                         </span>
                       )}
                     </div>
-                    <p className="text-gray-500 mb-2">{plan.description}</p>
-                    <div className="flex items-center text-gray-700 space-x-4">
+                    <p className="text-gray-500 dark:text-gray-400 mb-2">{plan.description}</p>
+                    <div className="flex items-center text-gray-700 dark:text-gray-300 space-x-4">
                       <span className="text-lg font-bold text-primary">{formatCurrency(plan.price)}/mês</span>
-                      <span className="text-sm text-gray-500">ou {formatCurrency(plan.priceYearly)}/ano</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">ou {formatCurrency(plan.priceYearly)}/ano</span>
                     </div>
-                    <div className="mt-2 text-sm text-gray-600">
+                    <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                       <span className="mr-4">{plan.usersCount} clientes ativos</span>
                       <span className="mr-4">Máx. {plan.productLimit} produtos</span>
                       <span>Máx. {plan.clientLimit} clientes</span>
@@ -248,35 +248,36 @@ export default function PlansPage() {
                   <div className="flex space-x-2">
                     <button 
                       onClick={() => togglePlanExpand(plan.id)}
-                      className="p-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                      className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
-                      {expandedPlan === plan.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                      {expandedPlan === plan.id ? 
+                        <ChevronUp size={18} className="text-gray-500 dark:text-gray-400" /> : 
+                        <ChevronDown size={18} className="text-gray-500 dark:text-gray-400" />
+                      }
                     </button>
                     <button 
                       onClick={() => handleEditPlan(plan)}
-                      className="p-2 text-blue-500 hover:text-blue-700 focus:outline-none"
+                      className="p-2 text-blue-600 hover:bg-blue-50 rounded-md dark:text-blue-400 dark:hover:bg-blue-900/20"
                     >
-                      <Edit size={20} />
+                      <Edit size={18} />
                     </button>
-                    {plan.usersCount === 0 && (
-                      <button 
-                        onClick={() => handleDeletePlan(plan.id)}
-                        className="p-2 text-red-500 hover:text-red-700 focus:outline-none"
-                      >
-                        <Trash size={20} />
-                      </button>
-                    )}
+                    <button 
+                      onClick={() => handleDeletePlan(plan.id)}
+                      className="p-2 text-red-600 hover:bg-red-50 rounded-md dark:text-red-400 dark:hover:bg-red-900/20"
+                    >
+                      <Trash size={18} />
+                    </button>
                   </div>
                 </div>
                 
                 {expandedPlan === plan.id && (
-                  <div className="mt-4 border-t pt-4">
-                    <h4 className="font-medium mb-2">Recursos inclusos:</h4>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <div className="mt-4 pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Recursos incluídos:</h4>
+                    <ul className="space-y-1">
                       {plan.features.map((feature, index) => (
-                        <li key={index} className="flex items-start">
-                          <Check size={16} className="text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                          <span>{feature}</span>
+                        <li key={index} className="flex items-center text-gray-600 dark:text-gray-400">
+                          <Check size={16} className="text-green-500 mr-2" />
+                          {feature}
                         </li>
                       ))}
                     </ul>
@@ -288,135 +289,138 @@ export default function PlansPage() {
         </div>
       )}
       
-      {/* Tabela de comparação */}
       {activeTab === 'comparison' && (
         <PlansComparisonTable plans={plans} />
       )}
       
-      {/* Modal de Edição/Criação de Plano */}
+      {/* Modal de edição de plano */}
       {editingPlan && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b">
-              <h2 className="text-xl font-bold">{isCreating ? 'Criar Novo Plano' : 'Editar Plano'}</h2>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-2xl mx-4 overflow-hidden">
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                {isCreating ? 'Criar Novo Plano' : 'Editar Plano'}
+              </h2>
             </div>
-            <div className="p-6 space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Nome do Plano
                   </label>
                   <input
+                    id="name"
                     type="text"
                     value={editingPlan.name}
                     onChange={(e) => setEditingPlan({...editingPlan, name: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-                    placeholder="Ex: Plano Premium"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Status do Plano
+                  <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Descrição
                   </label>
-                  <div className="flex space-x-4">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={editingPlan.isActive}
-                        onChange={(e) => setEditingPlan({...editingPlan, isActive: e.target.checked})}
-                        className="rounded text-primary focus:ring-primary h-4 w-4"
-                      />
-                      <span className="ml-2 text-sm text-gray-700">Ativo</span>
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={editingPlan.isPublic}
-                        onChange={(e) => setEditingPlan({...editingPlan, isPublic: e.target.checked})}
-                        className="rounded text-primary focus:ring-primary h-4 w-4"
-                      />
-                      <span className="ml-2 text-sm text-gray-700">Público</span>
-                    </label>
-                  </div>
+                  <input
+                    id="description"
+                    type="text"
+                    value={editingPlan.description}
+                    onChange={(e) => setEditingPlan({...editingPlan, description: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+                  />
                 </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Descrição
-                </label>
-                <textarea
-                  value={editingPlan.description}
-                  onChange={(e) => setEditingPlan({...editingPlan, description: e.target.value})}
-                  rows={2}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-                  placeholder="Descreva o plano brevemente"
-                />
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="price" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Preço Mensal (R$)
                   </label>
                   <input
+                    id="price"
                     type="number"
                     min="0"
                     step="0.01"
                     value={editingPlan.price}
                     onChange={(e) => setEditingPlan({...editingPlan, price: parseFloat(e.target.value) || 0})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="priceYearly" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Preço Anual (R$)
                   </label>
                   <input
+                    id="priceYearly"
                     type="number"
                     min="0"
                     step="0.01"
                     value={editingPlan.priceYearly}
                     onChange={(e) => setEditingPlan({...editingPlan, priceYearly: parseFloat(e.target.value) || 0})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-                  />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Limite de Produtos
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={editingPlan.productLimit}
-                    onChange={(e) => setEditingPlan({...editingPlan, productLimit: parseInt(e.target.value) || 0})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="productLimit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Limite de Produtos
+                  </label>
+                  <input
+                    id="productLimit"
+                    type="number"
+                    min="1"
+                    value={editingPlan.productLimit}
+                    onChange={(e) => setEditingPlan({...editingPlan, productLimit: parseInt(e.target.value) || 0})}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="clientLimit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Limite de Clientes
                   </label>
                   <input
+                    id="clientLimit"
                     type="number"
-                    min="0"
+                    min="1"
                     value={editingPlan.clientLimit}
                     onChange={(e) => setEditingPlan({...editingPlan, clientLimit: parseInt(e.target.value) || 0})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
+                </div>
+                
+                <div className="flex space-x-4">
+                  <div className="flex items-center">
+                    <input
+                      id="isActive"
+                      type="checkbox"
+                      checked={editingPlan.isActive}
+                      onChange={(e) => setEditingPlan({...editingPlan, isActive: e.target.checked})}
+                      className="h-4 w-4 text-primary focus:ring-primary border-gray-300 dark:border-gray-600 rounded"
+                    />
+                    <label htmlFor="isActive" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                      Ativo
+                    </label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      id="isPublic"
+                      type="checkbox"
+                      checked={editingPlan.isPublic}
+                      onChange={(e) => setEditingPlan({...editingPlan, isPublic: e.target.checked})}
+                      className="h-4 w-4 text-primary focus:ring-primary border-gray-300 dark:border-gray-600 rounded"
+                    />
+                    <label htmlFor="isPublic" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                      Público
+                    </label>
+                  </div>
                 </div>
               </div>
               
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Recursos Inclusos
-                </label>
+              {/* Recursos do plano */}
+              <div className="mt-6">
+                <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Recursos do Plano</h3>
+                
                 <div className="space-y-2">
                   {editingPlan.features.map((feature: string, index: number) => (
                     <div key={index} className="flex items-center">
@@ -424,18 +428,18 @@ export default function PlansPage() {
                         type="text"
                         value={feature}
                         onChange={(e) => {
-                          const updatedFeatures = [...editingPlan.features];
-                          updatedFeatures[index] = e.target.value;
-                          setEditingPlan({...editingPlan, features: updatedFeatures});
+                          const newFeatures = [...editingPlan.features];
+                          newFeatures[index] = e.target.value;
+                          setEditingPlan({...editingPlan, features: newFeatures});
                         }}
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                       />
                       <button
                         type="button"
                         onClick={() => handleRemoveFeature(index)}
-                        className="ml-2 text-red-500 hover:text-red-700"
+                        className="ml-2 p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md"
                       >
-                        <X size={20} />
+                        <Trash size={16} />
                       </button>
                     </div>
                   ))}
@@ -445,35 +449,37 @@ export default function PlansPage() {
                       type="text"
                       value={editingPlan.newFeature}
                       onChange={(e) => setEditingPlan({...editingPlan, newFeature: e.target.value})}
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-                      placeholder="Adicionar novo recurso"
+                      placeholder="Adicionar novo recurso..."
+                      className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                       onKeyPress={(e) => e.key === 'Enter' && handleAddFeature()}
                     />
                     <button
                       type="button"
                       onClick={handleAddFeature}
-                      className="ml-2 text-primary hover:text-primary/80"
+                      className="ml-2 p-2 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-md"
                     >
-                      <Plus size={20} />
+                      <Plus size={16} />
                     </button>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="p-6 border-t bg-gray-50 flex justify-end space-x-3">
+            <div className="p-6 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
               <button
+                type="button"
                 onClick={() => setEditingPlan(null)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
+                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 rounded-md"
               >
                 Cancelar
               </button>
               <button
+                type="button"
                 onClick={handleSavePlan}
-                className="flex items-center gap-1 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
+                className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-md"
               >
-                <Save size={16} />
-                <span>Salvar Plano</span>
+                <Save size={16} className="inline-block mr-1" />
+                {isCreating ? 'Criar Plano' : 'Salvar Alterações'}
               </button>
             </div>
           </div>

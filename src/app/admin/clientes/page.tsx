@@ -164,9 +164,9 @@ export default function AdminClientsPage() {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 dark:bg-gray-900">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Clientes</h1>
+        <h1 className="text-title">Clientes</h1>
         <button 
           onClick={() => setShowAddModal(true)}
           className="flex items-center gap-1 bg-primary hover:bg-primary/90 text-white py-2 px-4 rounded-md"
@@ -185,16 +185,16 @@ export default function AdminClientsPage() {
           <input
             type="text"
             placeholder="Buscar clientes..."
-            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+            className="input pl-10"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
         
         <div className="flex items-center gap-2">
-          <Filter size={18} className="text-gray-400" />
+          <Filter size={18} className="text-gray-400 dark:text-gray-500" />
           <select
-            className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+            className="select"
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
           >
@@ -206,7 +206,7 @@ export default function AdminClientsPage() {
         
         <div>
           <select
-            className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+            className="select"
             value={planFilter}
             onChange={(e) => setPlanFilter(e.target.value)}
           >
@@ -219,188 +219,191 @@ export default function AdminClientsPage() {
       </div>
 
       {/* Lista de clientes */}
-      <div className="bg-white shadow rounded-lg overflow-hidden">
+      <div className="table-container">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead className="table-header">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col">
                   Empresa
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col">
                   Proprietário
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col">
                   E-mail
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col">
                   Plano
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col">
                   Desde
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="text-right">
                   Ações
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {filteredClients.length === 0 ? (
-                <tr>
-                  <td colSpan={7} className="px-6 py-4 text-center text-gray-500">
-                    Nenhum cliente encontrado
+            <tbody className="table-body">
+              {filteredClients.map(client => (
+                <tr key={client.id} className="table-row">
+                  <td className="table-cell font-medium">
+                    {client.businessName}
+                  </td>
+                  <td className="table-cell">
+                    {client.ownerName}
+                  </td>
+                  <td className="table-cell-light">
+                    {client.email}
+                  </td>
+                  <td className="table-cell">
+                    <span className={`inline-flex px-2 py-1 text-xs rounded-full ${
+                      client.plan === 'Profissional' 
+                        ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' 
+                        : client.plan === 'Básico'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                          : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
+                    }`}>
+                      {client.plan}
+                    </span>
+                  </td>
+                  <td className="table-cell">
+                    <span className={`inline-flex px-2 py-1 text-xs rounded-full ${
+                      client.status === 'Ativo' 
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' 
+                        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                    }`}>
+                      {client.status}
+                    </span>
+                  </td>
+                  <td className="table-cell-light">
+                    {formatDate(client.createdAt)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button
+                      onClick={() => handleEdit(client)}
+                      className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-4"
+                    >
+                      <Edit size={18} />
+                    </button>
+                    <button
+                      onClick={() => handleDeleteConfirm(client.id)}
+                      className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                    >
+                      <Trash size={18} />
+                    </button>
                   </td>
                 </tr>
-              ) : (
-                filteredClients.map((client) => (
-                  <tr key={client.id}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">{client.businessName}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-500">{client.ownerName}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{client.email}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{client.plan}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                        ${client.status === 'Ativo' 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'}`}
-                      >
-                        {client.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-500">{formatDate(client.createdAt)}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <div className="flex justify-end space-x-2">
-                        <button 
-                          className="text-blue-600 hover:text-blue-900"
-                          onClick={() => handleEdit(client)}
-                        >
-                          <Edit size={18} />
-                        </button>
-                        <button 
-                          className="text-red-600 hover:text-red-900"
-                          onClick={() => handleDeleteConfirm(client.id)}
-                        >
-                          <Trash size={18} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
+              ))}
             </tbody>
           </table>
         </div>
       </div>
-      
-      {/* Modal de Edição */}
-      {showEditModal && currentClient && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-            <h2 className="text-xl font-semibold mb-4">Editar Cliente</h2>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nome da Empresa
-                </label>
-                <input
-                  type="text"
-                  value={currentClient.businessName}
-                  onChange={(e) => setCurrentClient({...currentClient, businessName: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                />
-              </div>
+
+      {/* Modal de edição de cliente */}
+      {showEditModal && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full mx-auto">
+            <div className="p-6">
+              <h3 className="text-subtitle mb-4">Editar Cliente</h3>
               
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nome do Proprietário
-                </label>
-                <input
-                  type="text"
-                  value={currentClient.ownerName}
-                  onChange={(e) => setCurrentClient({...currentClient, ownerName: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  E-mail
-                </label>
-                <input
-                  type="email"
-                  value={currentClient.email}
-                  onChange={(e) => setCurrentClient({...currentClient, email: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Telefone
-                </label>
-                <input
-                  type="text"
-                  value={currentClient.phone}
-                  onChange={(e) => setCurrentClient({...currentClient, phone: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Plano
-                </label>
-                <select
-                  value={currentClient.plan}
-                  onChange={(e) => setCurrentClient({...currentClient, plan: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                >
-                  <option value="Gratuito">Gratuito</option>
-                  <option value="Básico">Básico</option>
-                  <option value="Profissional">Profissional</option>
-                </select>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Status
-                </label>
-                <select
-                  value={currentClient.status}
-                  onChange={(e) => setCurrentClient({...currentClient, status: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                >
-                  <option value="Ativo">Ativo</option>
-                  <option value="Inativo">Inativo</option>
-                </select>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Nome da Empresa
+                  </label>
+                  <input
+                    type="text"
+                    className="input"
+                    value={currentClient?.businessName || ''}
+                    onChange={(e) => setCurrentClient({...currentClient, businessName: e.target.value})}
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Nome do Proprietário
+                  </label>
+                  <input
+                    type="text"
+                    className="input"
+                    value={currentClient?.ownerName || ''}
+                    onChange={(e) => setCurrentClient({...currentClient, ownerName: e.target.value})}
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    E-mail
+                  </label>
+                  <input
+                    type="email"
+                    className="input"
+                    value={currentClient?.email || ''}
+                    onChange={(e) => setCurrentClient({...currentClient, email: e.target.value})}
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Telefone
+                  </label>
+                  <input
+                    type="text"
+                    className="input"
+                    value={currentClient?.phone || ''}
+                    onChange={(e) => setCurrentClient({...currentClient, phone: e.target.value})}
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Plano
+                  </label>
+                  <select
+                    className="select"
+                    value={currentClient?.plan || 'Básico'}
+                    onChange={(e) => setCurrentClient({...currentClient, plan: e.target.value})}
+                  >
+                    <option value="Gratuito">Gratuito</option>
+                    <option value="Básico">Básico</option>
+                    <option value="Profissional">Profissional</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Status
+                  </label>
+                  <select
+                    className="select"
+                    value={currentClient?.status || 'Ativo'}
+                    onChange={(e) => setCurrentClient({...currentClient, status: e.target.value})}
+                  >
+                    <option value="Ativo">Ativo</option>
+                    <option value="Inativo">Inativo</option>
+                  </select>
+                </div>
               </div>
             </div>
             
-            <div className="mt-6 flex justify-end space-x-3">
+            <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4 flex justify-end space-x-4 rounded-b-lg">
               <button
                 onClick={() => setShowEditModal(false)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700"
               >
+                <X size={18} className="mr-2" />
                 Cancelar
               </button>
+              
               <button
                 onClick={handleSaveEdit}
-                className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
+                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90"
               >
+                <Check size={18} className="mr-2" />
                 Salvar
               </button>
             </div>

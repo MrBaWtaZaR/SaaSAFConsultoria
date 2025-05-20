@@ -212,57 +212,57 @@ export default function NewSalePage() {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 dark:bg-gray-900">
       <div className="mb-6">
         <button 
           onClick={() => router.push('/dashboard/vendas')}
-          className="flex items-center text-sm text-gray-600 hover:text-gray-900"
+          className="flex items-center text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
         >
           <ArrowLeft size={16} className="mr-1" /> Voltar para vendas
         </button>
       </div>
       
-      <h1 className="text-2xl font-bold mb-6">Registrar Nova Venda</h1>
+      <h1 className="text-2xl font-bold mb-6 dark:text-white">Registrar Nova Venda</h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Coluna esquerda - Dados da venda */}
         <div className="lg:col-span-2 space-y-6">
           {/* Cliente e data */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-medium mb-4">Informações da Venda</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h2 className="text-lg font-medium mb-4 dark:text-white">Informações da Venda</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Cliente
                 </label>
                 <div className="relative">
                   <input
                     type="text"
                     placeholder="Buscar cliente..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                     value={clientSearchTerm}
                     onChange={(e) => setClientSearchTerm(e.target.value)}
                   />
                   
                   {clientSearchTerm && (
-                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+                    <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg max-h-60 overflow-auto">
                       {filteredClients.length === 0 ? (
-                        <div className="px-4 py-2 text-sm text-gray-500">
+                        <div className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">
                           Nenhum cliente encontrado
                         </div>
                       ) : (
                         filteredClients.map(client => (
                           <div 
                             key={client.id}
-                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
                             onClick={() => {
                               setSale(prev => ({ ...prev, clientId: client.id }))
                               setClientSearchTerm(client.name)
                             }}
                           >
-                            <div className="font-medium">{client.name}</div>
-                            <div className="text-sm text-gray-500">{client.email} • {client.phone}</div>
+                            <div className="font-medium dark:text-white">{client.name}</div>
+                            <div className="text-sm text-gray-500 dark:text-gray-400">{client.email} • {client.phone}</div>
                           </div>
                         ))
                       )}
@@ -272,12 +272,12 @@ export default function NewSalePage() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Data da Venda
                 </label>
                 <input
                   type="date"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   value={sale.date}
                   onChange={(e) => setSale(prev => ({ ...prev, date: e.target.value }))}
                 />
@@ -286,12 +286,12 @@ export default function NewSalePage() {
           </div>
           
           {/* Produtos */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-medium mb-4">Adicionar Produtos</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h2 className="text-lg font-medium mb-4 dark:text-white">Adicionar Produtos</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Produto
                 </label>
                 <div className="relative">
@@ -301,29 +301,29 @@ export default function NewSalePage() {
                   <input
                     type="text"
                     placeholder="Buscar produto..."
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                     value={productSearchTerm}
                     onChange={(e) => setProductSearchTerm(e.target.value)}
                   />
                   
                   {productSearchTerm && !selectedProduct && (
-                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+                    <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg max-h-60 overflow-auto">
                       {filteredProducts.length === 0 ? (
-                        <div className="px-4 py-2 text-sm text-gray-500">
+                        <div className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">
                           Nenhum produto encontrado
                         </div>
                       ) : (
                         filteredProducts.map(product => (
                           <div 
                             key={product.id}
-                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
                             onClick={() => {
                               setSelectedProduct(product.id)
                               setProductSearchTerm(product.name)
                             }}
                           >
-                            <div className="font-medium">{product.name}</div>
-                            <div className="text-sm text-gray-500">{formatCurrency(product.price)} • Estoque: {product.stock}</div>
+                            <div className="font-medium dark:text-white">{product.name}</div>
+                            <div className="text-sm text-gray-500 dark:text-gray-400">{formatCurrency(product.price)} • Estoque: {product.stock}</div>
                           </div>
                         ))
                       )}
@@ -333,13 +333,13 @@ export default function NewSalePage() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Quantidade
                 </label>
                 <input
                   type="number"
                   min="1"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   value={quantity}
                   onChange={(e) => setQuantity(parseInt(e.target.value) || 0)}
                 />
@@ -348,11 +348,11 @@ export default function NewSalePage() {
               {selectedProduct && currentProduct && (
                 <>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Tamanho
                     </label>
                     <select
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                       value={selectedSize}
                       onChange={(e) => setSelectedSize(e.target.value)}
                     >
@@ -364,11 +364,11 @@ export default function NewSalePage() {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Cor
                     </label>
                     <select
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                       value={selectedColor}
                       onChange={(e) => setSelectedColor(e.target.value)}
                     >
@@ -394,39 +394,39 @@ export default function NewSalePage() {
           </div>
           
           {/* Itens da venda */}
-          <div className="bg-white rounded-lg shadow">
-            <div className="p-6 border-b">
-              <h2 className="text-lg font-medium">Itens da Venda</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow">
+            <div className="p-6 border-b dark:border-gray-700">
+              <h2 className="text-lg font-medium dark:text-white">Itens da Venda</h2>
             </div>
             
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Produto
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Variação
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Preço Unit.
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Qtd.
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Total
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Ações
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                   {sale.items.length === 0 ? (
                     <tr>
-                      <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
+                      <td colSpan={6} className="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
                         Nenhum item adicionado
                       </td>
                     </tr>
@@ -434,23 +434,23 @@ export default function NewSalePage() {
                     sale.items.map((item) => (
                       <tr key={item.id}>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">{item.productName}</div>
+                          <div className="text-sm font-medium text-gray-900 dark:text-white">{item.productName}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-500">{item.size} • {item.color}</div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">{item.size} • {item.color}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">{formatCurrency(item.unitPrice)}</div>
+                          <div className="text-sm text-gray-900 dark:text-white">{formatCurrency(item.unitPrice)}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">{item.quantity}</div>
+                          <div className="text-sm text-gray-900 dark:text-white">{item.quantity}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">{formatCurrency(item.total)}</div>
+                          <div className="text-sm font-medium text-gray-900 dark:text-white">{formatCurrency(item.total)}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button 
-                            className="text-red-600 hover:text-red-900"
+                            className="text-red-600 hover:text-red-900 dark:text-red-500 dark:hover:text-red-400"
                             onClick={() => handleRemoveItem(item.id)}
                           >
                             <Trash size={18} />
@@ -467,46 +467,46 @@ export default function NewSalePage() {
         
         {/* Coluna direita - Resumo e pagamento */}
         <div className="space-y-6">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-medium mb-4">Resumo da Venda</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h2 className="text-lg font-medium mb-4 dark:text-white">Resumo da Venda</h2>
             
             <div className="space-y-4">
               <div className="flex justify-between">
-                <span className="text-gray-600">Subtotal:</span>
-                <span className="font-medium">{formatCurrency(subtotal)}</span>
+                <span className="text-gray-600 dark:text-gray-400">Subtotal:</span>
+                <span className="font-medium dark:text-white">{formatCurrency(subtotal)}</span>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Desconto (R$)
                 </label>
                 <input
                   type="number"
                   min="0"
                   step="0.01"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   value={sale.discount || ''}
                   onChange={(e) => setSale(prev => ({ ...prev, discount: parseFloat(e.target.value) || 0 }))}
                 />
               </div>
               
-              <div className="pt-4 border-t border-gray-200 flex justify-between">
-                <span className="font-medium">Total:</span>
+              <div className="pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between">
+                <span className="font-medium dark:text-white">Total:</span>
                 <span className="text-xl font-bold text-primary">{formatCurrency(totalWithDiscount)}</span>
               </div>
             </div>
           </div>
           
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-medium mb-4">Forma de Pagamento</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h2 className="text-lg font-medium mb-4 dark:text-white">Forma de Pagamento</h2>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Método de Pagamento
                 </label>
                 <select
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   value={sale.paymentMethod}
                   onChange={(e) => setSale(prev => ({ ...prev, paymentMethod: e.target.value }))}
                 >
@@ -518,11 +518,11 @@ export default function NewSalePage() {
               
               {sale.paymentMethod === 'credit' && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Parcelas
                   </label>
                   <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                     value={sale.installments}
                     onChange={(e) => setSale(prev => ({ ...prev, installments: parseInt(e.target.value) }))}
                   >
@@ -534,12 +534,12 @@ export default function NewSalePage() {
               )}
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Observações
                 </label>
                 <textarea
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   value={sale.notes}
                   onChange={(e) => setSale(prev => ({ ...prev, notes: e.target.value }))}
                   placeholder="Observações sobre a venda..."

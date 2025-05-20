@@ -85,9 +85,9 @@ export default function AdminSettingsPage() {
   }
   
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 dark:bg-gray-900">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Configurações</h1>
+        <h1 className="text-2xl font-bold dark:text-white">Configurações</h1>
         <button
           onClick={handleSave}
           disabled={saving}
@@ -108,20 +108,20 @@ export default function AdminSettingsPage() {
       </div>
       
       {successMessage && (
-        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded dark:bg-green-900 dark:border-green-700 dark:text-green-300">
           {successMessage}
         </div>
       )}
       
-      <div className="bg-white rounded-lg shadow">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow">
         {/* Abas de configuração */}
-        <div className="border-b">
+        <div className="border-b dark:border-gray-700">
           <div className="flex overflow-x-auto">
             <button
               className={`px-4 py-3 font-medium border-b-2 ${
                 activeTab === 'notifications' 
                   ? 'border-primary text-primary' 
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
               }`}
               onClick={() => setActiveTab('notifications')}
             >
@@ -135,7 +135,7 @@ export default function AdminSettingsPage() {
               className={`px-4 py-3 font-medium border-b-2 ${
                 activeTab === 'email' 
                   ? 'border-primary text-primary' 
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
               }`}
               onClick={() => setActiveTab('email')}
             >
@@ -149,7 +149,7 @@ export default function AdminSettingsPage() {
               className={`px-4 py-3 font-medium border-b-2 ${
                 activeTab === 'payment' 
                   ? 'border-primary text-primary' 
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
               }`}
               onClick={() => setActiveTab('payment')}
             >
@@ -163,7 +163,7 @@ export default function AdminSettingsPage() {
               className={`px-4 py-3 font-medium border-b-2 ${
                 activeTab === 'security' 
                   ? 'border-primary text-primary' 
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
               }`}
               onClick={() => setActiveTab('security')}
             >
@@ -177,7 +177,7 @@ export default function AdminSettingsPage() {
               className={`px-4 py-3 font-medium border-b-2 ${
                 activeTab === 'database' 
                   ? 'border-primary text-primary' 
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
               }`}
               onClick={() => setActiveTab('database')}
             >
@@ -194,11 +194,11 @@ export default function AdminSettingsPage() {
           {/* Notificações */}
           {activeTab === 'notifications' && (
             <div className="space-y-6">
-              <h2 className="text-lg font-medium mb-4">Configurações de Notificações</h2>
+              <h2 className="text-lg font-medium mb-4 dark:text-white">Configurações de Notificações</h2>
               
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium text-gray-700">Nova assinatura</label>
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Nova assinatura</label>
                   <div className="relative inline-block w-10 mr-2 align-middle select-none">
                     <input
                       type="checkbox"
@@ -210,14 +210,14 @@ export default function AdminSettingsPage() {
                     <label
                       htmlFor="newSubscription"
                       className={`toggle-label block overflow-hidden h-6 rounded-full ${
-                        settings.emailNotifications.newSubscription ? 'bg-primary' : 'bg-gray-300'
+                        settings.emailNotifications.newSubscription ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'
                       } cursor-pointer`}
                     ></label>
                   </div>
                 </div>
                 
                 <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium text-gray-700">Assinatura cancelada</label>
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Assinatura cancelada</label>
                   <div className="relative inline-block w-10 mr-2 align-middle select-none">
                     <input
                       type="checkbox"
@@ -229,14 +229,14 @@ export default function AdminSettingsPage() {
                     <label
                       htmlFor="cancelledSubscription"
                       className={`toggle-label block overflow-hidden h-6 rounded-full ${
-                        settings.emailNotifications.cancelledSubscription ? 'bg-primary' : 'bg-gray-300'
+                        settings.emailNotifications.cancelledSubscription ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'
                       } cursor-pointer`}
                     ></label>
                   </div>
                 </div>
                 
                 <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium text-gray-700">Falha no pagamento</label>
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Falha no pagamento</label>
                   <div className="relative inline-block w-10 mr-2 align-middle select-none">
                     <input
                       type="checkbox"
@@ -248,45 +248,7 @@ export default function AdminSettingsPage() {
                     <label
                       htmlFor="paymentFailed"
                       className={`toggle-label block overflow-hidden h-6 rounded-full ${
-                        settings.emailNotifications.paymentFailed ? 'bg-primary' : 'bg-gray-300'
-                      } cursor-pointer`}
-                    ></label>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium text-gray-700">Pagamento bem-sucedido</label>
-                  <div className="relative inline-block w-10 mr-2 align-middle select-none">
-                    <input
-                      type="checkbox"
-                      id="paymentSuccess"
-                      checked={settings.emailNotifications.paymentSuccess}
-                      onChange={(e) => updateSettings('emailNotifications', 'paymentSuccess', e.target.checked)}
-                      className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-gray-300 appearance-none cursor-pointer transition-transform duration-200 ease-in"
-                    />
-                    <label
-                      htmlFor="paymentSuccess"
-                      className={`toggle-label block overflow-hidden h-6 rounded-full ${
-                        settings.emailNotifications.paymentSuccess ? 'bg-primary' : 'bg-gray-300'
-                      } cursor-pointer`}
-                    ></label>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium text-gray-700">Novo cliente</label>
-                  <div className="relative inline-block w-10 mr-2 align-middle select-none">
-                    <input
-                      type="checkbox"
-                      id="newClient"
-                      checked={settings.emailNotifications.newClient}
-                      onChange={(e) => updateSettings('emailNotifications', 'newClient', e.target.checked)}
-                      className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-gray-300 appearance-none cursor-pointer transition-transform duration-200 ease-in"
-                    />
-                    <label
-                      htmlFor="newClient"
-                      className={`toggle-label block overflow-hidden h-6 rounded-full ${
-                        settings.emailNotifications.newClient ? 'bg-primary' : 'bg-gray-300'
+                        settings.emailNotifications.paymentFailed ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'
                       } cursor-pointer`}
                     ></label>
                   </div>
@@ -298,86 +260,93 @@ export default function AdminSettingsPage() {
           {/* E-mail */}
           {activeTab === 'email' && (
             <div className="space-y-6">
-              <h2 className="text-lg font-medium mb-4">Configurações de E-mail</h2>
+              <h2 className="text-lg font-medium mb-4 dark:text-white">Configurações de E-mail</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Servidor SMTP
                   </label>
                   <input
                     type="text"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                     value={settings.emailSettings.smtpServer}
                     onChange={(e) => updateSettings('emailSettings', 'smtpServer', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Porta SMTP
                   </label>
                   <input
                     type="number"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                     value={settings.emailSettings.smtpPort}
                     onChange={(e) => updateSettings('emailSettings', 'smtpPort', parseInt(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Usuário SMTP
                   </label>
                   <input
                     type="text"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                     value={settings.emailSettings.smtpUser}
                     onChange={(e) => updateSettings('emailSettings', 'smtpUser', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Senha SMTP
                   </label>
                   <input
                     type="password"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                     value={settings.emailSettings.smtpPassword}
                     onChange={(e) => updateSettings('emailSettings', 'smtpPassword', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Nome do Remetente
                   </label>
                   <input
                     type="text"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                     value={settings.emailSettings.senderName}
                     onChange={(e) => updateSettings('emailSettings', 'senderName', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     E-mail do Remetente
                   </label>
                   <input
                     type="email"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                     value={settings.emailSettings.senderEmail}
                     onChange={(e) => updateSettings('emailSettings', 'senderEmail', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
                   />
                 </div>
               </div>
               
-              <div className="mt-6">
-                <button className="bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-md">
-                  Testar Configurações
-                </button>
+              <div className="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <AlertTriangle className="h-5 w-5 text-yellow-400" />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm text-yellow-700 dark:text-yellow-400">
+                      Certifique-se de que as informações SMTP estão corretas. Recomendamos testar o envio antes de salvar.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           )}

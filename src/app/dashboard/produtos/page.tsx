@@ -107,9 +107,9 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 dark:bg-gray-900">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Produtos</h1>
+        <h1 className="text-title">Produtos</h1>
         <Link 
           href="/dashboard/produtos/novo" 
           className="flex items-center gap-1 bg-primary hover:bg-primary/90 text-white py-2 px-4 rounded-md"
@@ -123,20 +123,20 @@ export default function ProductsPage() {
       <div className="flex flex-col md:flex-row md:items-center gap-4">
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search size={18} className="text-gray-400" />
+            <Search size={18} className="text-gray-400 dark:text-gray-500" />
           </div>
           <input
             type="text"
             placeholder="Buscar produtos..."
-            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+            className="input pl-10"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
         <div className="flex items-center space-x-2">
-          <Filter size={18} className="text-gray-400" />
+          <Filter size={18} className="text-gray-400 dark:text-gray-500" />
           <select
-            className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+            className="select"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
@@ -148,70 +148,68 @@ export default function ProductsPage() {
       </div>
 
       {/* Products list */}
-      <div className="bg-white shadow rounded-lg overflow-hidden">
+      <div className="table-container">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead className="table-header">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col">
                   Produto
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col">
                   Preço
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col">
                   Estoque
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col">
                   Categoria
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col">
                   Variações
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="text-right">
                   Ações
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="table-body">
               {filteredProducts.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
+                  <td colSpan={6} className="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
                     Nenhum produto encontrado
                   </td>
                 </tr>
               ) : (
                 filteredProducts.map((product) => (
-                  <tr key={product.id} className="hover:bg-gray-50 cursor-pointer" onClick={() => handleEdit(product.id)}>
+                  <tr key={product.id} className="table-row" onClick={() => handleEdit(product.id)}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="h-10 w-10 bg-gray-200 rounded-md flex-shrink-0"></div>
+                        <div className="h-10 w-10 bg-gray-200 dark:bg-gray-700 rounded-md flex-shrink-0"></div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{product.name}</div>
-                          <div className="text-sm text-gray-500">{product.description}</div>
+                          <div className="text-sm font-medium text-gray-900 dark:text-white">{product.name}</div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">{product.description}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">R$ {product.price.toFixed(2)}</div>
+                    <td className="table-cell">
+                      R$ {product.price.toFixed(2)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className={`text-sm ${product.stock <= 10 ? 'text-red-600' : 'text-gray-900'}`}>
+                      <div className={`text-sm ${product.stock <= 10 ? 'text-red-600 dark:text-red-400' : 'text-gray-900 dark:text-gray-200'}`}>
                         {product.stock} unidades
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{product.categories.join(', ')}</div>
+                    <td className="table-cell">
+                      {product.categories.join(', ')}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-500">
-                        {product.sizes.length} tamanhos, {product.colors.length} cores
-                      </div>
+                    <td className="table-cell-light">
+                      {product.sizes.length} tamanhos, {product.colors.length} cores
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end space-x-2">
                         <button 
-                          className="text-blue-600 hover:text-blue-900"
+                          className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                           onClick={(e) => {
                             e.stopPropagation()
                             handleEdit(product.id)
@@ -220,7 +218,7 @@ export default function ProductsPage() {
                           <Edit size={18} />
                         </button>
                         <button 
-                          className="text-red-600 hover:text-red-900"
+                          className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
                           onClick={(e) => {
                             e.stopPropagation()
                             handleDeleteConfirm(product.id)
@@ -241,16 +239,16 @@ export default function ProductsPage() {
       {/* Modal de Exclusão */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-            <h2 className="text-xl font-semibold mb-4">Confirmar Exclusão</h2>
-            <p className="text-gray-600 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6">
+            <h2 className="text-xl font-semibold mb-4 dark:text-white">Confirmar Exclusão</h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
               Tem certeza que deseja excluir este produto? Esta ação não pode ser desfeita.
             </p>
             
             <div className="flex justify-end space-x-3">
               <button
                 onClick={() => setShowDeleteModal(false)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 dark:bg-gray-800"
               >
                 Cancelar
               </button>

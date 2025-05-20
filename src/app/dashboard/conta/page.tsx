@@ -109,19 +109,19 @@ export default function AccountPage() {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Configurações da Conta</h1>
+    <div className="p-6 space-y-6 dark:bg-gray-900">
+      <h1 className="text-2xl font-bold dark:text-white">Configurações da Conta</h1>
       
       <div className="flex flex-col md:flex-row gap-6">
         {/* Navegação lateral */}
-        <div className="w-full md:w-64 bg-white rounded-lg shadow overflow-hidden">
+        <div className="w-full md:w-64 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
           <nav className="p-2">
             <button
               onClick={() => setActiveTab('profile')}
               className={`flex items-center w-full px-4 py-3 rounded-md mb-1 text-left ${
                 activeTab === 'profile' 
                   ? 'bg-primary/10 text-primary' 
-                  : 'hover:bg-gray-100 text-gray-700'
+                  : 'hover:bg-gray-100 text-gray-700 dark:hover:bg-gray-700 dark:text-gray-300'
               }`}
             >
               <User size={18} className="mr-3" />
@@ -133,7 +133,7 @@ export default function AccountPage() {
               className={`flex items-center w-full px-4 py-3 rounded-md mb-1 text-left ${
                 activeTab === 'password' 
                   ? 'bg-primary/10 text-primary' 
-                  : 'hover:bg-gray-100 text-gray-700'
+                  : 'hover:bg-gray-100 text-gray-700 dark:hover:bg-gray-700 dark:text-gray-300'
               }`}
             >
               <Key size={18} className="mr-3" />
@@ -145,7 +145,7 @@ export default function AccountPage() {
               className={`flex items-center w-full px-4 py-3 rounded-md mb-1 text-left ${
                 activeTab === 'subscription' 
                   ? 'bg-primary/10 text-primary' 
-                  : 'hover:bg-gray-100 text-gray-700'
+                  : 'hover:bg-gray-100 text-gray-700 dark:hover:bg-gray-700 dark:text-gray-300'
               }`}
             >
               <CreditCard size={18} className="mr-3" />
@@ -158,14 +158,14 @@ export default function AccountPage() {
         <div className="flex-1">
           {/* Perfil */}
           {activeTab === 'profile' && (
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-lg font-medium mb-6">Informações de Perfil</h2>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 className="text-lg font-medium mb-6 dark:text-white">Informações de Perfil</h2>
               
               <form onSubmit={handleProfileSubmit} className="space-y-4">
                 <div>
                   <label 
                     htmlFor="name" 
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                   >
                     Nome
                   </label>
@@ -175,14 +175,14 @@ export default function AccountPage() {
                     type="text"
                     required
                     defaultValue={user.name}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 
                 <div>
                   <label 
                     htmlFor="email" 
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                   >
                     E-mail
                   </label>
@@ -192,7 +192,7 @@ export default function AccountPage() {
                     type="email"
                     required
                     defaultValue={user.email}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 
@@ -221,14 +221,14 @@ export default function AccountPage() {
           
           {/* Senha */}
           {activeTab === 'password' && (
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-lg font-medium mb-6">Alterar Senha</h2>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 className="text-lg font-medium mb-6 dark:text-white">Alterar Senha</h2>
               
               <form onSubmit={handlePasswordSubmit} className="space-y-4">
                 <div>
                   <label 
                     htmlFor="currentPassword" 
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                   >
                     Senha Atual
                   </label>
@@ -237,14 +237,14 @@ export default function AccountPage() {
                     name="currentPassword"
                     type="password"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 
                 <div>
                   <label 
                     htmlFor="newPassword" 
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                   >
                     Nova Senha
                   </label>
@@ -253,14 +253,14 @@ export default function AccountPage() {
                     name="newPassword"
                     type="password"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 
                 <div>
                   <label 
                     htmlFor="confirmPassword" 
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                   >
                     Confirmar Nova Senha
                   </label>
@@ -269,7 +269,7 @@ export default function AccountPage() {
                     name="confirmPassword"
                     type="password"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 
@@ -282,7 +282,7 @@ export default function AccountPage() {
                     {loading ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                        <span>Salvando...</span>
+                        <span>Alterando senha...</span>
                       </>
                     ) : (
                       <>
@@ -298,73 +298,146 @@ export default function AccountPage() {
           
           {/* Assinatura */}
           {activeTab === 'subscription' && (
-            <div className="bg-white rounded-lg shadow">
-              <div className="p-6 border-b">
-                <h2 className="text-lg font-medium">Informações da Assinatura</h2>
+            <div className="space-y-6">
+              {/* Resumo do plano atual */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                <h2 className="text-lg font-medium mb-6 dark:text-white">Detalhes da Assinatura</h2>
+                
+                <div className="space-y-4">
+                  <div className="pb-4 border-b border-gray-200 dark:border-gray-700">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                          Plano {currentPlan.name}
+                        </h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                          {subscription.status === 'ACTIVE' ? 'Assinatura ativa' : 'Assinatura inativa'}
+                        </p>
+                      </div>
+                      <span className="text-xl font-bold text-primary">
+                        {currentPlan.price > 0 ? `R$ ${currentPlan.price.toFixed(2)}/mês` : 'Gratuito'}
+                      </span>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                      <div>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Data de início</p>
+                        <p className="text-sm font-medium dark:text-white">{formatDate(subscription.startDate)}</p>
+                      </div>
+                      
+                      <div>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Próximo pagamento</p>
+                        <p className="text-sm font-medium dark:text-white">
+                          {subscription.nextPayment ? formatDate(subscription.nextPayment) : 'N/A'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Benefícios incluídos:</h4>
+                    <ul className="space-y-1">
+                      {currentPlan.features.map((feature, index) => (
+                        <li key={index} className="flex items-center text-gray-600 dark:text-gray-400">
+                          <Package size={16} className="text-primary mr-2" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="pt-4">
+                    <Link
+                      href="/dashboard/planos"
+                      className="flex items-center justify-between bg-primary/10 hover:bg-primary/20 text-primary py-2 px-4 rounded-md"
+                    >
+                      <span>Ver outros planos disponíveis</span>
+                      <ChevronRight size={18} />
+                    </Link>
+                  </div>
+                </div>
               </div>
               
-              <div className="p-6 space-y-4">
-                <div className="flex justify-between items-center pb-4 border-b border-gray-100">
-                  <span className="text-gray-600">Plano atual:</span>
-                  <span className="font-medium text-primary">{currentPlan.name}</span>
-                </div>
+              {/* Método de Pagamento */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                <h2 className="text-lg font-medium mb-6 dark:text-white">Método de Pagamento</h2>
                 
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Status:</span>
-                  <span className="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
-                    Ativo
-                  </span>
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Data de início:</span>
-                  <span>{formatDate(subscription.startDate)}</span>
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Próxima cobrança:</span>
-                  <span>{formatDate(subscription.nextPayment)}</span>
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Valor mensal:</span>
-                  <span className="font-medium">R$ {currentPlan.price.toFixed(2)}</span>
-                </div>
-                
-                <div className="pt-4">
-                  <Link 
-                    href="/dashboard/conta/mudar-plano" 
-                    className="flex items-center justify-between w-full bg-primary/5 hover:bg-primary/10 text-primary py-3 px-4 rounded-md"
-                  >
+                <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-md">
+                  <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                      <Package size={18} className="mr-2" />
-                      <span>Alterar meu plano</span>
+                      <CreditCard size={20} className="text-gray-500 dark:text-gray-400 mr-3" />
+                      <div>
+                        <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Cartão de Crédito terminando em 4242</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Expira em 12/2024</p>
+                      </div>
                     </div>
-                    <ChevronRight size={18} />
-                  </Link>
-                </div>
-                
-                <div className="pt-2">
-                  <button className="flex items-center justify-between w-full bg-red-50 hover:bg-red-100 text-red-700 py-3 px-4 rounded-md">
-                    <div className="flex items-center">
-                      <CreditCard size={18} className="mr-2" />
-                      <span>Cancelar assinatura</span>
-                    </div>
-                    <ChevronRight size={18} />
-                  </button>
+                    <button className="text-primary text-sm hover:underline">
+                      Editar
+                    </button>
+                  </div>
                 </div>
               </div>
               
-              <div className="p-6 bg-gray-50 border-t">
-                <h3 className="font-medium mb-2">Detalhes do Plano {currentPlan.name}</h3>
-                <ul className="space-y-2">
-                  {currentPlan.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="text-green-500 mr-2">✓</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Histórico de pagamentos */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+                <div className="p-6 border-b dark:border-gray-700">
+                  <h2 className="text-lg font-medium dark:text-white">Histórico de Pagamentos</h2>
+                </div>
+                
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-700">
+                      <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                          Data
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                          Descrição
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                          Valor
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                          Status
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                          15/05/2023
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                          Assinatura Plano {currentPlan.name}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                          R$ {currentPlan.price.toFixed(2)}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                            Pago
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                          15/04/2023
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                          Assinatura Plano {currentPlan.name}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                          R$ {currentPlan.price.toFixed(2)}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                            Pago
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           )}
